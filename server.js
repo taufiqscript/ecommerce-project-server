@@ -25,4 +25,8 @@ mongoose.connect(MONGO_URL).catch(err => {
 
 app.use(routes)
 
+app.get('/', (req, res) => {
+    res.send('API Ecommerce Project is running...')
+})
+
 module.exports = app
