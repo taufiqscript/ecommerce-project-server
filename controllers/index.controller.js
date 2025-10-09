@@ -74,11 +74,11 @@ const googleLogin = async (req, res) => {
             SECRET_KEY,
             { expiresIn: "12h" }
         )
-
+        const userId = user._id
         user.token = token
         await user.save()
 
-        return OK(res, 200, { token }, "Google login success")
+        return OK(res, 200, { token, userId }, "Google login success")
     } catch (error) {
         console.log(error)
         return ERR(res, 500, "Internal server error!")
