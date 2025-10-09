@@ -27,12 +27,12 @@ mongoose.connect(MONGO_URL).catch(err => {
 app.use('/api', routes)
 app.use('/api/payment', routesPayment)
 
-// app.get('/', (req, res) => {
-//     res.send('API Ecommerce Project is running...')
-// })
-
-app.listen(5000, () => {
-    console.log("server berjalan di port " + 5000)
+app.get('/', (req, res) => {
+    res.send('API Ecommerce Project is running...')
 })
+
+// app.listen(5000, () => {
+//     console.log("server berjalan di port " + 5000)
+// })
 
 module.exports = app

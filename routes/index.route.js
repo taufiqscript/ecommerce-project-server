@@ -11,7 +11,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "https://ecommerce-project-client-two.vercel.app/auth/google/callback"
+            callbackURL: "https://ecommerce-project-client-two.vercel.app/api/auth/google/callback"
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
@@ -38,7 +38,7 @@ route.get(
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
         const token = jwt.sign({ id: req.user._id }, process.env.SECRET_KEY, { expiresIn: '12h' })
-        res.redirect(`https://ecommerce-project-client-two.vercel.app/login?token=${token}`)
+        res.redirect(`https://ecommerce-project-client-two.vercel.app/api/login?token=${token}`)
     }
 )
 
