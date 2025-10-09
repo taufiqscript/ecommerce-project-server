@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const routes = require('./routes/index.route')
+const routesPayment = require('./routes/payment.route')
 const passport = require('passport')
 
 const { MONGO_URL } = process.env
@@ -23,10 +24,15 @@ mongoose.connect(MONGO_URL).catch(err => {
     }
 })
 
-app.use(routes)
+app.use('/api', routes)
+app.use('/api/payment', routesPayment)
 
-app.get('/', (req, res) => {
-    res.send('API Ecommerce Project is running...')
+// app.get('/', (req, res) => {
+//     res.send('API Ecommerce Project is running...')
+// })
+
+app.listen(5000, () => {
+    console.log("server berjalan di port " + 5000)
 })
 
 module.exports = app

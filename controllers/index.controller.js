@@ -44,11 +44,11 @@ const signInUser = async (req, res) => {
             SECRET_KEY,
             { expiresIn: "12h" }
         )
-
+        const userId = user._id
         user.token = token
         await user.save()
 
-        return OK(res, 200, { token }, "Sign In success")
+        return OK(res, 200, { token, userId }, "Sign In success")
     } catch (error) {
         console.log(error)
         return ERR(res, 500, 'Internal server error!')

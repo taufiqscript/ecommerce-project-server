@@ -38,7 +38,8 @@ const userSchema = mongoose.Schema({
     email: {
         unique: true,
         required: true,
-        type: String
+        type: String,
+        match: [/^\S+@\S+\.\S+$/, 'Gunakan format email yang valid']
     },
     password: {
         required: false,
@@ -54,7 +55,7 @@ const userSchema = mongoose.Schema({
         type: Array,
         default: []
     }
-})
+}, { timestamp: true })
 
 module.exports = {
     User: mongoose.model("User", userSchema)
