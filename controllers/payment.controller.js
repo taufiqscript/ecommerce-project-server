@@ -16,8 +16,6 @@ const createPayment = async (req, res) => {
 
         const orderId = 'ORDER-' + Date.now()
 
-        const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:5173'
-
         const parameter = {
             transaction_details: {
                 order_id: orderId,
@@ -26,9 +24,6 @@ const createPayment = async (req, res) => {
             customer_details: {
                 first_name: customerName,
                 email
-            },
-            callbacks: {
-                finish: `${FRONTEND_URL}/payment-success`
             }
         }
 
