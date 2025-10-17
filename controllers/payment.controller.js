@@ -27,8 +27,6 @@ const createPayment = async (req, res) => {
             }
         }
 
-        const transaction = await snap.createTransaction(parameter)
-
         await Transaction.create({
             user: userId,
             orderId,
@@ -36,6 +34,8 @@ const createPayment = async (req, res) => {
             transactionStatus: 'pending',
             paymentType: 'pending'
         })
+
+        const transaction = await snap.createTransaction(parameter)
 
         return OK(res, 200, {
             token: transaction.token,
@@ -50,22 +50,20 @@ const createPayment = async (req, res) => {
 const handleNotification = async (req, res) => {
     try {
         const notification = req.body
-        const { order_id, transaction_status, payment_type, transaction_id } = notification
-
+        const { order_id, transaction_status, payment_type, transaction_id } = notification 
         await Transaction.findOneAndUpdate(
             { orderId: order_id },
             {
                 transactionStatus: transaction_status,
                 paymentType: payment_type,
-                transactionId: transaction_id
-            },
-            { new: true }
-        )
+                transactionId: transaction_id 
+            }, { new: true })
 
         return OK(res, 200, null, 'OK')
-    } catch (error) {
+    }
+    catch (error) {
         console.error('Error handleNotification:', error)
-        return ERR(res, 500, error.message)
+        return ERR(res, 500, error.message) 
     }
 }
 
